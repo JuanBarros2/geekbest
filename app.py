@@ -1,15 +1,10 @@
-from ext.database.database import init_db
 from flask import Flask
-from flask_graphql import GraphQLView
-from ext.graphql.schema import schema
+from ext.api import api
+from ext.database import database
 
-app = Flask(__name__)
 
-app.add_url_rule(
-    '/graphql',
-    view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True)
-)
-
-if __name__ == '__main__':
-    init_db()
-    app.run()
+def create_app():
+    app = Flask(__name__)
+    database.init_app()
+    api.init_app(app)
+    return app

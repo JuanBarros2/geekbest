@@ -1,8 +1,7 @@
 from mongoengine import connect
-
-# You can connect to a real mongo server instance by your own.
-connect('graphene-mongo-example', host='mongomock://localhost', alias='default')
+from ..api.job.model_job import JobModel
 
 
-def init_db():
-    pass
+def init_app():
+    connect('bestgeek',
+            host='mongomock://localhost', alias='default')
