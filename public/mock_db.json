@@ -1756,31 +1756,31 @@
     {
       "id": 33922,
       "city": "São Paulo - SP",
-      "technologies": [null, null],
+      "technologies": ["Vue", "Node"],
       "experience": "2-4 years"
     },
     {
       "id": 33916,
       "city": "Rio de Janeiro - RJ",
-      "technologies": [null, null],
+      "technologies": ["Java", "C"],
       "experience": "0-2 years"
     },
     {
       "id": 33870,
       "city": "Remote",
-      "technologies": [null],
+      "technologies": ["Android"],
       "experience": "2-4 years"
     },
     {
       "id": 33869,
       "city": "Remote",
-      "technologies": [null, null],
+      "technologies": ["React", "Node"],
       "experience": "2-4 years"
     },
     {
       "id": 33868,
       "city": "Curitiba - PR",
-      "technologies": [null, null],
+      "technologies": ["Ruby", "Angular"],
       "experience": "0-2 years"
     }
   ]

@@ -1,7 +1,7 @@
 from datetime import datetime
 from mongoengine import Document
 from mongoengine.fields import (
-    StringField,
+    StringField, ListField, IntField, ObjectIdField
 )
 from graphene_mongo import MongoengineObjectType
 from graphene.relay import Node
@@ -9,7 +9,10 @@ from graphene.relay import Node
 
 class JobModel(Document):
     meta = {'collection': 'job'}
+    _id = IntField(primary_key=True)
     city = StringField()
+    technologies = ListField(StringField())
+    experience = StringField()
 
 
 class JobSchema(MongoengineObjectType):

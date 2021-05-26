@@ -2,9 +2,16 @@ from .model_job import JobSchema, JobModel
 from graphene import ObjectType, Field, String, List, Argument
 
 
-class JobQuery(ObjectType):
-    job = Field(List(JobSchema), pagination=Argument(
-        String, default_value=""))
+def none_to_default(**kwargs):
+    return {k: v for k, v in kwargs.items() if len(v) != 0}
 
-    def resolve_job(root, info, pagination):
-        return list(JobModel.objects.all())
+
+class JobQuery(ObjectType):
+    job = Field(List(JobSchema), args={
+        'city': Argument(
+            List(String), default_value=[]),
+        'technologies': Argument(
+            List(String), default_value=[])})
+
+    def resolve_job(root, info, city, technologies):
+        return list(JobModel.objects(**none_to_default(technologies__in=technologies, city__in=city)))
