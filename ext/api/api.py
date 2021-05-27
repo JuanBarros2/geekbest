@@ -2,6 +2,7 @@
 from flask_graphql import GraphQLView
 from .graphql.schema import schema
 from .job.model_job import JobModel
+from .candidate.model_candidate import CandidateModel
 import json
 
 
@@ -11,6 +12,9 @@ def populate_db():
         jobs = data['jobs']
         for job in jobs:
             JobModel(**job).save()
+        candidates = data['candidates']
+        for candidate in candidates:
+            CandidateModel(**candidate).save()
 
 
 def init_app(app):

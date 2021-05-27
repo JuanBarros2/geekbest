@@ -1,9 +1,6 @@
 from .model_job import JobSchema, JobModel
 from graphene import ObjectType, Field, String, List, Argument
-
-
-def none_to_default(**kwargs):
-    return {k: v for k, v in kwargs.items() if len(v) != 0}
+from utils.args import none_to_default
 
 
 class JobQuery(ObjectType):
@@ -14,4 +11,8 @@ class JobQuery(ObjectType):
             List(String), default_value=[])})
 
     def resolve_job(root, info, city, technologies):
-        return list(JobModel.objects(**none_to_default(technologies__in=technologies, city__in=city)))
+        return list(
+            JobModel.objects(
+                **none_to_default(
+                    technologies__in=technologies,
+                    city__in=city)))

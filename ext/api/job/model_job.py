@@ -9,10 +9,10 @@ from graphene.relay import Node
 
 class JobModel(Document):
     meta = {'collection': 'job'}
-    _id = IntField(primary_key=True)
+    id = IntField(primary_key=True)
     city = StringField()
-    technologies = ListField(StringField())
     experience = StringField()
+    technologies = ListField(StringField())
 
 
 class JobSchema(MongoengineObjectType):
