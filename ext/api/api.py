@@ -4,6 +4,7 @@ from .graphql.schema import schema
 from .job.model_job import JobModel
 from .candidate.model_candidate import CandidateModel
 import json
+from flask_cors import CORS
 
 
 def populate_db():
@@ -19,7 +20,13 @@ def populate_db():
 
 def init_app(app):
     app.add_url_rule(
-        '/graphql',
-        view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True)
+        '/graphqli',
+        view_func=GraphQLView.as_view('graphqli', schema=schema, graphiql=True)
     )
+    app.add_url_rule(
+        '/graphql',
+        view_func=GraphQLView.as_view('graphql', schema=schema, batch=True)
+    )
+
+    CORS(app)
     populate_db()
