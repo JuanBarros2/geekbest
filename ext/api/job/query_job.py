@@ -9,8 +9,17 @@ class JobQuery(ObjectType):
             List(String), default_value=[]),
         'technologies': Argument(
             List(String), default_value=[])})
+    filters = Field(List(JobSchema))
 
     def resolve_job(root, info, city, technologies):
+        return list(
+            JobModel.objects(
+                **none_to_default(
+                    technologies__in=technologies,
+                    city__in=city)))
+
+
+    def resolve_filters(root, info, city, technologies):
         return list(
             JobModel.objects(
                 **none_to_default(
