@@ -8,7 +8,7 @@ from flask_cors import CORS
 
 
 def populate_db():
-    with open('./public/mock_db.json') as f:
+    with open('./public/mock_db.json', encoding='utf-8') as f:
         data = json.load(f)
         jobs = data['jobs']
         for job in jobs:

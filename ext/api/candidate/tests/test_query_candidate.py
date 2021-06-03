@@ -96,3 +96,17 @@ def test_should_filter_candidate_that_dont_match(graphql, candidates):
             'candidate': []
         }
     }
+
+def test_should_list_filters(graphql, candidates):
+    executed = graphql.execute(
+        '''{ filters {
+             city, experience, technologies }
+             }''')
+    filters = executed['data']['filters']
+    def assert_all(atual_list, expected_list):
+        diff = set(atual_list) ^ set(expected_list)
+        assert not diff
+    
+    assert_all(filters['city'], ['Rio de Janeiro - RJ', 'Recife - PE', 'Curitiba - PR'])
+    assert_all(filters['experience'],  ['12+ years', '4-5 years', '5-6 years'])
+    assert_all(filters['technologies'],  ['Java', 'Spring', 'React', 'AngularJS', 'C#', 'Actionscript'])

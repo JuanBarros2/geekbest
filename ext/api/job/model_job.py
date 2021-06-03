@@ -1,7 +1,7 @@
 from datetime import datetime
 from mongoengine import Document
 from mongoengine.fields import (
-    StringField, ListField, IntField, ObjectIdField
+    StringField, ListField, IntField
 )
 from graphene_mongo import MongoengineObjectType
 from graphene.relay import Node
@@ -21,11 +21,3 @@ class JobSchema(MongoengineObjectType):
         model = JobModel
         name = "Job"
         interfaces = (Node,)
-
-class Person(ObjectType):
-    first_name = String()
-    last_name = String()
-    full_name = String()
-
-    def resolve_full_name(parent, info):
-        return f"{parent.first_name} {parent.last_name}"

@@ -1,12 +1,12 @@
-from datetime import datetime
 from mongoengine import Document
 from mongoengine.fields import (
-    StringField, ListField, IntField,
-    ObjectIdField, BooleanField,
+    StringField, ListField, IntField, BooleanField,
     EmbeddedDocument, EmbeddedDocumentField
 )
 from graphene_mongo import MongoengineObjectType
 from graphene.relay import Node
+from graphene import ObjectType, String, List
+
 
 
 class TechnologyModel(EmbeddedDocument):
@@ -34,3 +34,9 @@ class CandidateSchema(MongoengineObjectType):
         model = CandidateModel
         name = "Candidate"
         interfaces = (Node,)
+        
+class FiltersSchema(ObjectType):
+    city = List(String)
+    experience =  List(String)
+    technologies =  List(String)
+
